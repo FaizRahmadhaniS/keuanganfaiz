@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeuanganKu - Modern & Responsif</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>KeuanganKu</h1>
+            <p>Catat dan kelola keuangan Anda dengan mudah.</p>
+        </header>
+        
+        <section class="summary-section">
+            <h2>Ringkasan</h2>
+            <div class="summary-grid">
+                <div class="card">
+                    <h3>Harian (Trading)</h3>
+                    <div class="card-details">
+                        <div class="detail-item income">
+                            <span>Pemasukan</span>
+                            <strong id="pemasukan-harian-total">Rp 0</strong>
+                        </div>
+                        <div class="detail-item expense">
+                            <span>Pengeluaran</span>
+                            <strong id="pengeluaran-harian-total">Rp 0</strong>
+                        </div>
+                    </div>
+                    <div class="card-total">
+                        <span>Total Bersih</span>
+                        <strong id="total-bersih-harian">Rp 0</strong>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Bulanan (Kerja)</h3>
+                    <div class="card-details">
+                         <div class="detail-item income">
+                            <span>Pemasukan</span>
+                            <strong id="pemasukan-bulanan-total">Rp 0</strong>
+                        </div>
+                        <div class="detail-item expense">
+                            <span>Pengeluaran</span>
+                            <strong id="pengeluaran-bulanan-total">Rp 0</strong>
+                        </div>
+                    </div>
+                    <div class="card-total">
+                        <span>Total Bersih</span>
+                        <strong id="total-bersih-bulanan">Rp 0</strong>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Tahunan (Kopi)</h3>
+                    <div class="card-details">
+                        <div class="detail-item income">
+                            <span>Pemasukan</span>
+                            <strong id="pemasukan-tahunan-total">Rp 0</strong>
+                        </div>
+                        <div class="detail-item expense">
+                            <span>Pengeluaran</span>
+                            <strong id="pengeluaran-tahunan-total">Rp 0</strong>
+                        </div>
+                    </div>
+                    <div class="card-total">
+                        <span>Total Bersih</span>
+                        <strong id="total-bersih-tahunan">Rp 0</strong>
+                    </div>
+                </div>
+
+                <div id="grand-total-card" class="card">
+                    <h4>TOTAL KESELURUHAN</h4>
+                    <strong id="grand-total-amount">Rp 0</strong>
+                    <div class="grand-total-breakdown">
+                        <div class="income">
+                            <i class='bx bx-up-arrow-alt'></i>
+                            <span id="grand-total-pemasukan">Rp 0</span>
+                        </div>
+                         <div class="expense">
+                            <i class='bx bx-down-arrow-alt'></i>
+                            <span id="grand-total-pengeluaran">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="transaction-section">
+            <div class="tab-nav">
+                <button class="tab-button active" onclick="openTab('harian', this)">Harian</button>
+                <button class="tab-button" onclick="openTab('bulanan', this)">Bulanan</button>
+                <button class="tab-button" onclick="openTab('tahunan', this)">Tahunan</button>
+            </div>
+
+            <div id="harian" class="tab-content active">
+                <form id="form-harian">
+                    <input type="hidden" id="edit-index-harian" value="-1">
+                    <div class="form-grid">
+                        <div class="form-group"><input type="date" id="tanggal" required></div>
+                        <div class="form-group"><input type="text" id="ket-harian" placeholder="Keterangan" required></div>
+                        <div class="form-group"><input type="number" id="pemasukan-harian" placeholder="Pemasukan" value="0"></div>
+                        <div class="form-group"><input type="number" id="pengeluaran-harian" placeholder="Pengeluaran" value="0"></div>
+                    </div>
+                    <button type="submit" class="btn" id="btn-harian"><i class='bx bx-plus'></i><span>Tambah Catatan</span></button>
+                </form>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Tanggal</th><th>Keterangan</th><th>Pemasukan</th><th>Pengeluaran</th><th>Aksi</th></tr></thead>
+                        <tbody id="tabel-harian"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="bulanan" class="tab-content">
+                <form id="form-bulanan">
+                     <input type="hidden" id="edit-index-bulanan" value="-1">
+                    <div class="form-grid">
+                        <div class="form-group"><input type="month" id="bulan" required></div>
+                        <div class="form-group"><input type="text" id="ket-bulanan" placeholder="Keterangan" required></div>
+                        <div class="form-group"><input type="number" id="pemasukan-bulanan" placeholder="Pemasukan" value="0"></div>
+                        <div class="form-group"><input type="number" id="pengeluaran-bulanan" placeholder="Pengeluaran" value="0"></div>
+                    </div>
+                    <button type="submit" class="btn" id="btn-bulanan"><i class='bx bx-plus'></i><span>Tambah Catatan</span></button>
+                </form>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Bulan</th><th>Keterangan</th><th>Pemasukan</th><th>Pengeluaran</th><th>Aksi</th></tr></thead>
+                        <tbody id="tabel-bulanan"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tahunan" class="tab-content">
+                <form id="form-tahunan">
+                     <input type="hidden" id="edit-index-tahunan" value="-1">
+                    <div class="form-grid">
+                        <div class="form-group"><input type="number" id="tahun" placeholder="Tahun (cth: 2025)" required></div>
+                        <div class="form-group"><input type="text" id="ket-tahunan" placeholder="Keterangan" required></div>
+                        <div class="form-group"><input type="number" id="pemasukan-tahunan" placeholder="Pemasukan" value="0"></div>
+                        <div class="form-group"><input type="number" id="pengeluaran-tahunan" placeholder="Pengeluaran" value="0"></div>
+                    </div>
+                    <button type="submit" class="btn" id="btn-tahunan"><i class='bx bx-plus'></i><span>Tambah Catatan</span></button>
+                </form>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead><tr><th>Tahun</th><th>Keterangan</th><th>Pemasukan</th><th>Pengeluaran</th><th>Aksi</th></tr></thead>
+                        <tbody id="tabel-tahunan"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
